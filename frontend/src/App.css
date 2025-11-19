@@ -1,0 +1,410 @@
+/* Modern Styling for the Portfolio Builder AI Agent
+   This file styles components, but gets its fonts
+   and colors from index.css.
+*/
+
+.App {
+  max-width: 960px;
+  margin: 40px auto;
+  padding: 30px;
+  background-color: var(--color-surface);
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0,0,0, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+h2 {
+  text-align: center;
+}
+
+/* General Card Styling */
+.skill-selector,
+.current-task,
+.portfolio-gallery {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  padding: 25px;
+  box-shadow: 0 4px 10px rgba(0,0,0, 0.05);
+}
+
+/* Current Task Summary */
+.current-task-summary {
+  background-color: var(--color-warning-bg);
+  border: 1px solid var(--color-warning-border);
+  border-left: 5px solid var(--color-warning-accent);
+  border-radius: 8px;
+  padding: 15px 20px;
+  margin-bottom: 20px;
+  cursor: pointer;
+  transition: box-shadow 0.3s ease;
+}
+
+.current-task-summary:hover {
+  box-shadow: 0 6px 15px var(--color-warning-accent-translucent, rgba(255, 193, 7, 0.3));
+}
+
+.current-task-summary h2 {
+  font-size: 1.4em;
+  color: var(--color-text);
+  margin-top: 0;
+  margin-bottom: 5px;
+  text-align: left;
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.current-task-summary p {
+  font-size: 0.95em;
+  color: var(--color-text);
+  margin-bottom: 5px;
+}
+
+.current-task-summary p.click-to-open {
+  font-size: 0.85em;
+  color: var(--color-primary);
+  text-decoration: underline;
+}
+
+/* Skill Selector adjustments */
+.skill-selector {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center the grid if it doesn't fill the width */
+}
+
+.skill-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 25px;
+  width: 100%; /* Ensure the grid takes full width of its container */
+  max-width: 900px; /* Optional: limit max width of the grid itself */
+  margin-top: 20px;
+}
+
+.skill-card {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  padding: 25px;
+  box-shadow: 0 4px 10px rgba(0,0,0, 0.05);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 150px; /* Slightly increased min-height */
+}
+
+.skill-card:hover {
+  border-color: var(--color-primary);
+  box-shadow: 0 6px 15px var(--color-primary-translucent, rgba(0, 123, 255, 0.2));
+  transform: translateY(-3px);
+}
+
+.skill-card h3 {
+  font-size: 1.5em; /* Slightly larger title */
+  color: var(--color-primary);
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+.skill-card p {
+  font-size: 1em;
+  color: var(--color-text-muted);
+  margin-bottom: 0;
+}
+
+/* Current Task */
+.current-task p.project-brief {
+  padding: 15px;
+  font-size: 1em;
+}
+
+/* Portfolio Gallery adjustments */
+.portfolio-card {
+  padding: 15px;
+}
+
+.portfolio-card h3 {
+  font-size: 1.2em;
+}
+
+.portfolio-card p {
+  font-size: 0.9em;
+}
+
+.task-actions {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.task-actions input[type="text"] {
+  flex-grow: 1;
+  width: auto;
+  margin-bottom: 0;
+  /* Basic input styling */
+  padding: 10px;
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  font-size: 1em;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+}
+
+.task-actions button {
+  flex-shrink: 0;
+  margin-bottom: 0;
+}
+
+/* New style for the chat toggle button */
+.chat-toggle button {
+  background-color: #6c757d; /* A neutral grey */
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  margin-top: 15px;
+}
+
+.chat-toggle button:hover {
+  background-color: #5a6268;
+}
+
+.back-to-dashboard-button {
+  background-color: #007bff; /* Blue color */
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  margin-top: 20px;
+}
+
+.back-to-dashboard-button:hover {
+  background-color: #0056b3;
+}
+
+@media (max-width: 600px) {
+  .task-actions {
+    flex-direction: column;
+  }
+  .task-actions input[type="text"] {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  .task-actions button {
+    width: 100%;
+  }
+}
+
+/* Portfolio Gallery */
+.portfolio-gallery .task-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 25px;
+}
+
+.portfolio-card {
+  background-color: var(--color-surface); /* Was light teal */
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0, 0.05);
+  border-left: 5px solid var(--color-primary);
+}
+
+.portfolio-card h3 {
+  color: var(--color-primary);
+  margin-top: 0;
+  font-size: 1.3em;
+}
+
+.portfolio-card p.project-brief-display {
+  white-space: pre-wrap;
+  font-size: 0.95em;
+  color: var(--color-text-muted);
+}
+
+.portfolio-card a {
+  display: inline-block;
+  margin-top: 15px;
+  font-weight: 600;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .App {
+    margin: 20px;
+    padding: 20px;
+  }
+}
+
+/* Welcome Message and Animations */
+.welcome-container {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.welcome-message {
+  font-size: 3em;
+  color: var(--color-primary);
+  opacity: 0;
+  animation: fadeIn 1s ease-out forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.skill-selector.animate-in .skill-card {
+  opacity: 0;
+  transform: translateY(50px);
+  animation: slideIn 0.6s ease-out forwards;
+}
+
+.skill-selector.animate-in .skill-card:nth-child(1) { animation-delay: 1.5s; }
+.skill-selector.animate-in .skill-card:nth-child(2) { animation-delay: 1.7s; }
+.skill-selector.animate-in .skill-card:nth-child(3) { animation-delay: 1.9s; }
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(50px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Code Review Section Styling */
+.code-review-section {
+  background-color: var(--color-surface-muted);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: 20px;
+  margin-top: 30px;
+}
+
+.code-review-section h3 {
+  font-size: 1.4em;
+  margin-top: 0;
+  margin-bottom: 15px;
+  text-align: left;
+  border-bottom: 1px solid var(--color-border);
+  padding-bottom: 10px;
+}
+
+.code-review-section textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  font-size: 0.95em;
+  font-family: var(--font-family-body);
+  resize: vertical;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+}
+
+.code-review-section button {
+  background-color: #17a2b8; /* Info blue */
+  color: white;
+  border: none;
+}
+
+.code-review-section button:hover {
+  background-color: #138496;
+}
+
+.code-rating-result {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-left: 4px solid var(--color-primary);
+  border-radius: 8px;
+  padding: 15px;
+  margin-top: 20px;
+}
+
+.code-rating-result h4 {
+  margin-top: 0;
+  color: var(--color-primary);
+  font-size: 1.1em;
+}
+
+.code-rating-result p {
+  white-space: pre-wrap;
+  font-size: 0.95em;
+}
+
+/* Chat Interface Styling */
+.chat-interface {
+  background-color: var(--color-surface-muted);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: 20px;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.chat-messages {
+  max-height: 400px; /* Increased height */
+  overflow-y: auto;
+  padding-right: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.message {
+  padding: 10px 15px;
+  border-radius: 15px;
+  max-width: 80%;
+  word-wrap: break-word;
+  line-height: 1.4;
+}
+
+.message.user {
+  background-color: var(--color-primary);
+  color: white;
+  align-self: flex-end;
+  border-bottom-right-radius: 2px;
+}
+
+.message.mentor {
+  background-color: var(--color-surface);
+  color: var(--color-text);
+  align-self: flex-start;
+  border-bottom-left-radius: 2px;
+  border: 1px solid var(--color-border);
+}
+
+.chat-input {
+  display: flex;
+  gap: 10px;
+}
+
+.chat-input input[type="text"] {
+  flex-grow: 1;
+  padding: 10px;
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  font-size: 1em;
+  background-color: var(--color-surface);
+  color: var(--color-text);
+}
+
+.chat-input button {
+  background-color: var(--color-primary);
+  color: white;
+  border: none;
+}
+
+.chat-input button:hover {
+  background-color: var(--color-primary-hover);
+}

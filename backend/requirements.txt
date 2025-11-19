@@ -1,0 +1,4 @@
+fastapi
+uvicorn
+supabase[client]
+python-dotenv
