@@ -21,16 +21,13 @@ app = FastAPI()
 # CORS middleware setup
 origins = [
     "http://localhost:5173",  # Your React dev server
-    "https://illustrious-gecko-95fc8a.netlify.app/",
-    # "YOUR_VERCEL_FRONTEND_URL"  # Add this *after* you deploy
+    "https://illustrious-gecko-95fc8a.netlify.app", # Without trailing slash
+    "https://illustrious-gecko-95fc8a.netlify.app/"  # With trailing slash
 ]
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "http://localhost:5173",
-        "https://illustrious-gecko-95fc8a.netlify.app/"
-    ],
+    allow_origins=origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -78,6 +75,10 @@ class CodeReviewOutput(BaseModel):
     skills_demonstrated: list[str] = Field(..., description="A list of skills the code demonstrates.")
 
 # --- API Endpoints ---
+
+@app.get("/config-check")
+async def config_check():
+    return {"configured_origins": origins}
 
 @app.get("/")
 async def read_root():
