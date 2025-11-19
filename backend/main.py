@@ -95,10 +95,17 @@ async def get_skills():
 
 @app.get("/task/current")
 async def get_current_task():
-    response = supabase.from_('tasks').select('*').eq('status', 'in_progress').limit(1).execute()
-    if response.data:
-        return {"task": response.data[0]}
-    return {"task": None}
+    try:
+        response = supabase.from_('tasks').select('*').eq('status', 'in_progress').limit(1).execute()
+        if hasattr(response, 'error') and response.error:
+            raise HTTPException(status_code=500, detail=f"Supabase error: {response.error.message}")
+        
+        if response.data:
+            return {"task": response.data[0]}
+        return {"task": None}
+    except Exception as e:
+        print(f"An unexpected error occurred in get_current_task: {e}") # For logging in Render
+        raise HTTPException(status_code=500, detail=f"An internal server error occurred: {str(e)}")
 
 @app.post("/task/start")
 async def start_task(request: SkillRequest):
