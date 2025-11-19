@@ -1,16 +1,5 @@
 from dotenv import load_dotenv
 import os
-from fastapi import FastAPI, HTTPException, Response, Header
-from supabase import create_client, Client
-import importlib
-try:
-    genai = importlib.import_module("google.generativeai")
-except Exception as e:
-    raise ImportError("The 'google.generativeai' module is required. Install it with: pip install google-generativeai") from e
-import uuid
-from datetime import datetime
-from pydantic import BaseModel, Field
-import json
 from fastapi.middleware.cors import CORSMiddleware
 
 # Load environment variables from .env file
@@ -19,15 +8,9 @@ load_dotenv()
 app = FastAPI()
 
 # CORS middleware setup
-origins = [
-    "http://localhost:5173",  # Your React dev server
-    "https://illustrious-gecko-95fc8a.netlify.app", # Without trailing slash
-    "https://illustrious-gecko-95fc8a.netlify.app/"  # With trailing slash
-]
-
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,
+    allow_origins=["*"], # Allow all origins
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -78,7 +61,8 @@ class CodeReviewOutput(BaseModel):
 
 @app.get("/config-check")
 async def config_check():
-    return {"configured_origins": origins}
+    # This will now reflect the wildcard
+    return {"configured_origins": ["*"]}
 
 @app.get("/")
 async def read_root():
@@ -86,8 +70,7 @@ async def read_root():
 
 
 @app.get("/skills")
-async def get_skills(response: Response):
-    response.headers["Access-Control-Allow-Origin"] = "https://illustrious-gecko-95fc8a.netlify.app"
+async def get_skills():
     try:
         supabase_response = supabase.from_('skill_prompts').select('skill_key').eq('is_active', True).execute()
         if hasattr(supabase_response, 'error') and supabase_response.error:
