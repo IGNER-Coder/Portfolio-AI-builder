@@ -21,6 +21,7 @@ app = FastAPI()
 # CORS middleware setup
 origins = [
     "http://localhost:5173",  # Your React dev server
+    "https://illustrious-gecko-95fc8a.netlify.app/",
     # "YOUR_VERCEL_FRONTEND_URL"  # Add this *after* you deploy
 ]
 
