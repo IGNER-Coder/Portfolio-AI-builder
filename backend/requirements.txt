@@ -3,3 +3,4 @@ uvicorn
 supabase[client]
 python-dotenv
 google-generativeai
+gunicorn
