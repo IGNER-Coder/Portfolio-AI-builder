@@ -1,6 +1,6 @@
 from dotenv import load_dotenv
 import os
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Response, Header
 from supabase import create_client, Client
 import importlib
 try:
@@ -86,25 +86,19 @@ async def read_root():
 
 
 @app.get("/skills")
-async def get_skills():
-    response = supabase.from_('skill_prompts').select('skill_key').eq('is_active', True).execute()
-    if response.data:
-        skills = [item['skill_key'] for item in response.data]
-        return {"skills": skills}
-    return {"skills": []}
-
-@app.get("/task/current")
-async def get_current_task():
+async def get_skills(response: Response):
+    response.headers["Access-Control-Allow-Origin"] = "https://illustrious-gecko-95fc8a.netlify.app"
     try:
-        response = supabase.from_('tasks').select('*').eq('status', 'in_progress').limit(1).execute()
-        if hasattr(response, 'error') and response.error:
-            raise HTTPException(status_code=500, detail=f"Supabase error: {response.error.message}")
+        supabase_response = supabase.from_('skill_prompts').select('skill_key').eq('is_active', True).execute()
+        if hasattr(supabase_response, 'error') and supabase_response.error:
+            raise HTTPException(status_code=500, detail=f"Supabase error: {supabase_response.error.message}")
         
-        if response.data:
-            return {"task": response.data[0]}
-        return {"task": None}
+        if supabase_response.data:
+            skills = [item['skill_key'] for item in supabase_response.data]
+            return {"skills": skills}
+        return {"skills": []}
     except Exception as e:
-        print(f"An unexpected error occurred in get_current_task: {e}") # For logging in Render
+        print(f"An unexpected error occurred in get_skills: {e}") # For logging in Render
         raise HTTPException(status_code=500, detail=f"An internal server error occurred: {str(e)}")
 
 @app.post("/task/start")
